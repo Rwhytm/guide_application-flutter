@@ -1,16 +1,19 @@
-# animated_guide
+# Screen Guide Animated
 
-A new Flutter project.
+Animasi Screen buat guide penggunaan aplikasi android atau ios
 
-## Getting Started
+<br>
+<br>
+<br>
+<br>
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+Berikut UI dari project ini ini : 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<div align = center>
+<img src="https://github.com/Rwhytm/flutter-animated/blob/main/screen1.png" width="230">
+<img src="https://github.com/Rwhytm/flutter-animated/blob/main/screen2.png" width="230">
+<img src="https://github.com/Rwhytm/flutter-animated/blob/main/screen3.png" width="230">
+<img src="https://github.com/Rwhytm/flutter-animated/blob/main/screen4.png" width="230">
+<img src="https://github.com/Rwhytm/flutter-animated/blob/main/screen5.png" width="230">
+</div>
