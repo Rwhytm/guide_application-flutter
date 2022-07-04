@@ -7,109 +7,329 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return const MaterialApp(
+      title: 'Flutter Animation Guide',
+      debugShowCheckedModeBanner: false,
+      home: Guide(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class Guide extends StatefulWidget {
+  const Guide({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Guide> createState() => _GuideState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _GuideState extends State<Guide> {
+  int index = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  /// Title TextStyle
+  TextStyle titletextStyle = const TextStyle(
+      color: Colors.white, fontSize: 45, fontWeight: FontWeight.w300);
+
+  /// SubTitle TextStyle
+  TextStyle subTitletextStyle = const TextStyle(
+      color: Color.fromARGB(255, 163, 163, 163),
+      fontSize: 17,
+      fontWeight: FontWeight.w300);
+
+  /// Func For changing BackGround Container Width
+  double changeContainerWidth(int index) {
+    switch (index) {
+      case 0:
+        return 0;
+      case 1:
+        return 100;
+      case 2:
+        return 200;
+      case 3:
+        return 280;
+      default:
+        return 0;
+    }
+  }
+
+  /// Center Content
+  Widget centerContent(int index) {
+    switch (index) {
+      case 0:
+        return Content(
+          titletextStyle: titletextStyle,
+          subTitletextStyle: subTitletextStyle,
+          title: 'Tutorial Memesan Lapangan',
+          subTitle: '',
+        );
+      case 1:
+        return Content(
+          titletextStyle: titletextStyle,
+          subTitletextStyle: subTitletextStyle,
+          title: 'Mendaftar',
+          subTitle: 'Daftar Akun dulu Bray',
+        );
+      case 2:
+        return Content(
+          titletextStyle: titletextStyle,
+          subTitletextStyle: subTitletextStyle,
+          title: 'Login',
+          subTitle: 'Nahhh abis itu login bro ke aplikasi',
+        );
+      case 3:
+        return Content(
+          titletextStyle: titletextStyle,
+          subTitletextStyle: subTitletextStyle,
+          title: 'Pesan',
+          subTitle: 'Pesan Lapangan mana yang lu mau',
+        );
+
+      default:
+        return Content(
+          titletextStyle: titletextStyle,
+          subTitletextStyle: subTitletextStyle,
+          title: 'Nah Begitulah Tutorial Memesan Lapangan',
+          subTitle: '',
+        );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    var size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      extendBodyBehindAppBar: true,
+      appBar: const MyAppBar(),
+      backgroundColor: index == 4 ? Colors.black54 : Colors.black54,
+      body: SafeArea(
+        child: SizedBox(
+          width: size.width,
+          height: size.height,
+          child: Stack(
+            alignment: index == 4 ? Alignment.center : Alignment.centerLeft,
+            children: [
+              // MAIN BACKGROUND
+              mainBg(size),
+
+              /// BTNS
+              if (index == 4)
+                finishBtn()
+              else if (index == 0)
+                startBtn()
+              else
+                twoBottomBtn(),
+
+              Center(
+                child: centerContent(index),
+              ),
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  /// TWO BOTTOM BUTTON
+  Positioned twoBottomBtn() {
+    return Positioned(
+      bottom: 15,
+      left: 60,
+      right: 60,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                index == 0 ? index = 4 : index--;
+              });
+            },
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              width: 90,
+              height: 50,
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 54, 54, 54),
+                  borderRadius: BorderRadius.circular(10)),
+              child: const Center(
+                  child: Icon(
+                Icons.arrow_back_ios_new_outlined,
+                color: Colors.white,
+                size: 30,
+              )),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                index == 4 ? index = 0 : index++;
+              });
+            },
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              width: 90,
+              height: 50,
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 54, 54, 54),
+                  borderRadius: BorderRadius.circular(10)),
+              child: const Center(
+                child: Text(
+                  "Next",
+                  style: TextStyle(color: Colors.white, fontSize: 17),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// FINISH BUTTON
+  Positioned finishBtn() {
+    return Positioned(
+      bottom: 15,
+      left: 60,
+      right: 60,
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            index == 4 ? index = 0 : index++;
+          });
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          width: 90,
+          height: 50,
+          decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 54, 54, 54),
+              borderRadius: BorderRadius.circular(index == 4 ? 20 : 10)),
+          child: const Center(
+            child: Text(
+              "Finish",
+              style: TextStyle(color: Colors.white, fontSize: 17),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// FINISH BUTTON
+  Positioned startBtn() {
+    return Positioned(
+      bottom: 15,
+      left: 60,
+      right: 60,
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            index = 1;
+          });
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          width: 90,
+          height: 50,
+          decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 54, 54, 54),
+              borderRadius: BorderRadius.circular(index == 4 ? 20 : 10)),
+          child: const Center(
+            child: Text(
+              "Start",
+              style: TextStyle(color: Colors.white, fontSize: 17),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// MAIN BACKGROUND Container
+  AnimatedContainer mainBg(Size size) {
+    return AnimatedContainer(
+      decoration: BoxDecoration(
+          color: Colors.grey[900],
+          borderRadius: index == 4 ? BorderRadius.circular(100) : null),
+      width: changeContainerWidth(index),
+      height: index == 4 ? 200 : size.height,
+      curve: Curves.fastOutSlowIn,
+      duration: const Duration(
+        milliseconds: 400,
+      ),
+    );
+  }
+}
+
+/// APP BAR
+class MyAppBar extends StatelessWidget with PreferredSizeWidget {
+  const MyAppBar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      centerTitle: true,
+      elevation: 0,
+      title: Column(
+        children: const [
+          Text("4 Cara booking Lapangan"),
+          SizedBox(
+            height: 2,
+          ),
+          Text(
+            "Tech Id",
+            style: TextStyle(color: Colors.white60, fontSize: 14),
+          )
+        ],
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(60);
+}
+
+/// Center Widget Components
+class Content extends StatelessWidget {
+  const Content({
+    Key? key,
+    required this.titletextStyle,
+    required this.subTitletextStyle,
+    required this.title,
+    required this.subTitle,
+  }) : super(key: key);
+
+  final TextStyle titletextStyle;
+  final TextStyle subTitletextStyle;
+  final String title;
+  final String subTitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          title,
+          textAlign: TextAlign.center,
+          style: titletextStyle,
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            subTitle,
+            textAlign: TextAlign.center,
+            style: subTitletextStyle,
+          ),
+        ),
+      ],
     );
   }
 }
