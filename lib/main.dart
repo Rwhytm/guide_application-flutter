@@ -50,7 +50,7 @@ class _GuideState extends State<Guide> {
       case 3:
         return 280;
       default:
-        return 0;
+        return 200;
     }
   }
 
