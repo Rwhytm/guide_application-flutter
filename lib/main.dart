@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 void main() {
   runApp(const MyApp());
@@ -89,7 +90,7 @@ class _GuideState extends State<Guide> {
         return Content(
           titletextStyle: titletextStyle,
           subTitletextStyle: subTitletextStyle,
-          title: 'Nah Begitulah Tutorial Memesan Lapangan',
+          title: '',
           subTitle: '',
         );
     }
@@ -120,6 +121,10 @@ class _GuideState extends State<Guide> {
               else
                 twoBottomBtn(),
 
+              index == 4
+                  ? Lottie.asset('assets/1.json',
+                      height: 250, animate: index == 4 ? true : false)
+                  : Container(),
               Center(
                 child: centerContent(index),
               ),
